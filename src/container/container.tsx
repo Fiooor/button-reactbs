@@ -9,7 +9,7 @@ interface ContainerProps {
 
 const Container = (props: ContainerProps) => {
     const { children, className } = props;
-    var contClass = classNames('container', className);
+    const contClass = classNames('container', className);
     return (
         <div className={contClass}>
             {children}

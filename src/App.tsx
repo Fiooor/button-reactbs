@@ -12,7 +12,7 @@ return (
         <div>
             <Button text={"Primary"} />
             <Button type={"primary-outline"} text={"Outline"} />
-            <Button text={"Disabled"} disabled/>
+            <Button text={"Disabled"} disabled />
             <Dropdown id="suggestion-element" button={{
                 type: "secondary",
                 text: "Erinevad Toimingud"

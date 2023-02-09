@@ -1,4 +1,4 @@
-import React, {MutableRefObject} from "react";
+import * as React from "react";
 import cx from 'classnames';
 import './styles.scss'
 export type TButtonType = 'primary' | 'secondary' | 'primary-outline' | 'secondary-outline'
@@ -6,13 +6,12 @@ export type TButtonType = 'primary' | 'secondary' | 'primary-outline' | 'seconda
 export interface IButtonProps<Type = TButtonType>{
     type?: Type;
     text?: string | number;
-    ref?: MutableRefObject<any>;
     onClick?: () => void;
     disabled?: boolean;
 }
 
-const Button = (props: IButtonProps) => {
-    const { text, type, onClick, disabled, ref} = props;
+const Button = React.forwardRef<HTMLButtonElement, IButtonProps>((props, ref) => {
+    const { text, type, onClick, disabled } = props;
     const btnClass = cx('btn', {
         [`btn_${type}`]: true
     });
@@ -26,7 +25,7 @@ const Button = (props: IButtonProps) => {
             </span>
         </button>
     );
-}
+});
 
 const defaultProps : IButtonProps = {
     type: "primary",
