@@ -13,7 +13,7 @@ return (
             <Button text={"Primary"} />
             <Button type={"primary-outline"} text={"Outline"} />
             <Button text={"Disabled"} disabled />
-            <Dropdown id="suggestion-element" button={{
+            <Dropdown id="suggestion-element" testA={"A"} testB={"B"} button={{
                 type: "secondary",
                 text: "Erinevad Toimingud"
             }} items={[

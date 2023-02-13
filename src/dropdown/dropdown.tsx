@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import Button, { TButtonType, IButtonProps } from "../button/button";
 import useForwardRef from "../hooks/useForwardRef";
 import './styles.scss'
+import cx from "classnames";
 
 export interface IDropdownItemProps extends React.HTMLAttributes<HTMLLIElement> {
     id?: string
@@ -14,6 +15,8 @@ export interface IDropdownProps<ButtonType = TButtonType> {
     items: IDropdownItemProps[];
     button: IButtonProps<ButtonType>;
     className?: string;
+    testA?: string;
+    testB?: string;
 }
 
 const Dropdown = React.forwardRef<HTMLButtonElement, IDropdownProps>((props, ref) => {
@@ -52,11 +55,17 @@ const Dropdown = React.forwardRef<HTMLButtonElement, IDropdownProps>((props, ref
         window.addEventListener("resize", getPosition)
     })
 
+    const dropDownClass = cx({
+        'dropdown': true,
+        'test__A': props.testA,
+        'test__B': props.testB
+    });
+
     return (
         <>
             <Button text={props.button.text} type={props.button.type} onClick={handleClick} ref={dropRef}/>
             {open && (
-                <div className={"dropdown"} style={{transform: `translate3d(${x}px, ${h}px, 0px)`, inset: "0px auto auto 0px", zIndex: "21"}}>
+                <div className={dropDownClass} style={{transform: `translate3d(${x}px, ${h}px, 0px)`, inset: "0px auto auto 0px", zIndex: "21"}}>
                     <ul className={"dropdown__element"} id={props.id}>
                         {listItems}
                     </ul>
