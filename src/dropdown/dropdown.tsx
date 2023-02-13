@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from "react";
+import React, { useEffect, useState } from "react";
 import Button, { TButtonType, IButtonProps } from "../button/button";
 import useForwardRef from "../hooks/useForwardRef";
 import './styles.scss'
@@ -17,10 +17,9 @@ export interface IDropdownProps<ButtonType = TButtonType> {
 }
 
 const Dropdown = React.forwardRef<HTMLButtonElement, IDropdownProps>((props, ref) => {
+    const dropRef = useForwardRef<HTMLButtonElement>(ref);
 
-    const items = props.items;
-    const { button } = props;
-    const listItems = items.map((item) =>
+    const listItems = props.items.map((item) =>
     <li className={"dropdown-item"} id={"test"}>
         <a className={"dropdown-link"} href={item.href}>
             <span className={"dropdown-label"}>{item.label}</span>
@@ -28,61 +27,38 @@ const Dropdown = React.forwardRef<HTMLButtonElement, IDropdownProps>((props, ref
     </li>
     );
 
-    const dropRef = useForwardRef<HTMLButtonElement>(ref);
-    const [isOpen, setIsOpen] = useState(false);
-    const [x, setX] = useState<number | undefined>();
-    const [y, setY] = useState<number | undefined>();
+    const [open, setOpen] = useState(false);
+    const [x, setX] = useState<number | undefined>()
+    const [y, setY] = useState<number | undefined>()
     const [h, setH] = useState<number | undefined>()
 
-    const setPosition = () => {
-        setIsOpen(!isOpen)
-        const dropdown = document.querySelector("div.dropdown") as HTMLElement;
-        if (dropdown) {
-            console.log(dropdown)
-            dropdown.setAttribute("style", `transform: translate3d(${x}px, ${h}px, 0px); inset: 0px auto auto 0px; z-index: 21`)
-        } else {
-            const observer = new MutationObserver(() => {
-                const dropdown = document.querySelector("div.dropdown") as HTMLElement;
-                if (dropdown) {
-                    observer.disconnect()
-                    console.log(dropdown)
-                    // X - Btn left | Y - Btn top + Btn height | Z - unnecessary
-                    dropdown.setAttribute("style", `transform: translate3d(${x}px, ${h}px, 0px); inset: 0px auto auto 0px; z-index: 21`)
-                }
-            });
-            observer.observe(document, {subtree: true, childList: true });
-        }
-    }
-
-    useEffect(() => {
-        setPosition();
-    }, []);
-
-    useEffect(() => {
-        window.addEventListener("resize", setPosition);
-    }, []);
-
-    useEffect(() => {
+    const getPosition = () => {
         const x = dropRef.current?.offsetLeft;
         setX(x);
 
         const y = dropRef.current?.offsetTop;
         setY(y);
 
-        const h = dropRef.current?.clientHeight + y;
+        const h = dropRef.current?.offsetHeight + y;
         setH(h);
+    }
+
+    const handleClick = () => {
+        setOpen(!open)
+    }
+
+    useEffect(() => {
+        getPosition()
+        window.addEventListener("resize", getPosition)
     })
 
     return (
         <>
-            <Button text={button.text} type={button.type} onClick={setPosition} ref={dropRef}/>
-            {isOpen && (
-                <div className={"dropdown"}>
+            <Button text={props.button.text} type={props.button.type} onClick={handleClick} ref={dropRef}/>
+            {open && (
+                <div className={"dropdown"} style={{transform: `translate3d(${x}px, ${h}px, 0px)`, inset: "0px auto auto 0px", zIndex: "21"}}>
                     <ul className={"dropdown__element"} id={props.id}>
                         {listItems}
-                        {x ?? "No "}
-                        {y ?? "No "}
-                        {h ?? "No "}
                     </ul>
                 </div>
             )}
