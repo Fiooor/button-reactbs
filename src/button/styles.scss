@@ -93,31 +93,58 @@
     }
 }
 
+.btn__tertiary {
+    background-color: #ec2227;
+    border-color: #ec2227;
+
+    &:hover {
+        background-color: #c02025;
+        border-color: #c02025;
+    }
+
+    &:focus {
+        background-color: #ec2227;
+        border: 2px solid #0094FF;
+        color: #eeeeee;
+    }
+
+    &--outline {
+        background-color: rgba(0,0,0,0);
+        border-color: #ec2227;
+        color: #ec2227;
+
+        &:hover {
+            background-color: #ec2227;
+            border-color: #ec2227;
+            color: #eeeeee;
+        }
+
+        &:focus {
+            background-color: #ec2227;
+            border: 2px solid #0094FF;
+            color: #eeeeee;
+        }
+    }
+}
+
 .btn__inner {
     display: flex;
     align-items: center;
     justify-content: center;
-    height: 100%;
-}
-
-.btn__text {
-    display: inline-flex;
 }
 
 .btn__icon-wrapper {
     flex-shrink: 0;
-    height: 1em;
     width: 24px;
     position: relative;
+    display: inline-flex;
 
     &--left {
-        margin-left: -4px;
-        margin-right: 6px;
+        margin: 0 6px 0 -4px;
     }
 
     &--right {
-        margin-left: 0px;
-        margin-right: -4px;
+        margin: 0 -4px 0 0;
     }
 }
 
@@ -128,10 +155,6 @@
 
 .btn__icon {
     font-size: 24px;
-    vertical-align: baseline;
-    margin-top: 0;
     position: absolute;
-    left: 0;
-    top: 50%;
-    transform: translateY(-50%);
+    transform: translateY(-75%);
 }

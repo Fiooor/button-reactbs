@@ -19,12 +19,15 @@ return (
                 name: "ArrowRight",
                 position: "right"
             }}/>
-            <Button text={'Disabled Button'} disabled icon={{
+            <Button text={'Disabled Button'} icon={{
                 name: "ArrowRight",
                 position: "left",
             }}/>
+            <Button icon={{
+                name: "ArrowDown",
+                position: "center",
+            }}/>
             <Dropdown id='suggestion-element' button={{
-                type: 'secondary',
                 text: 'Dropdown Button',
             }} items={[
                 { label: 'First option', href: '#' },
@@ -33,11 +36,25 @@ return (
             ]} />
         </Container>
         <Container>
-            <Button type={'secondary'} text={'Secondary Button'} />
-            <Button type={'secondary-outline'} text={'Outline Button'} />
-            <Button type={'secondary'} text={'Disabled Button'} disabled/>
+            <Button type={'secondary'} text={'Secondary Button'} icon={{
+                name: "ArrowRight",
+                position: "right"
+            }}/>
+            <Button type={'secondary-outline'} text={'Outline Button'} icon={{
+                name: "ArrowRight",
+                position: "right"
+            }}/>
+            <Button type={'secondary'} text={'Disabled Button'} disabled icon={{
+                name: "ArrowRight",
+                position: "left"
+            }}/>
+            <Button type={'secondary'} icon={{
+                name: "ArrowDown",
+                position: "center"
+            }}/>
             <Dropdown id='suggestion-element' button={{
                 text: 'Dropdown Button',
+                type: 'secondary'
             }} items={[
                 {
                     label: 'First option',
@@ -67,6 +84,32 @@ return (
                     href: '#',
                     color: 'employee'
                 }
+            ]} />
+        </Container>
+        <Container>
+            <Button text={'Tertiary Button'} type={"tertiary"} icon={{
+                name: "ArrowRight",
+                position: "right"
+            }}/>
+            <Button type={'tertiary-outline'} text={'Outline Button'} icon={{
+                name: "ArrowRight",
+                position: "right"
+            }}/>
+            <Button text={'Disabled Button'} type={"tertiary"} icon={{
+                name: "ArrowRight",
+                position: "left",
+            }}/>
+            <Button type={"tertiary"} icon={{
+                name: "ArrowDown",
+                position: "center",
+            }}/>
+            <Dropdown id='suggestion-element' button={{
+                type: "tertiary",
+                text: 'Dropdown Button',
+            }} items={[
+                { label: 'First option', href: '#' },
+                { label: 'Second option', href: '#' },
+                { label: 'Third option', href: '#' },
             ]} />
         </Container>
     </Container>
