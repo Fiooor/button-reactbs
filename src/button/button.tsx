@@ -7,9 +7,10 @@ export type TButtonType = 'primary' | 'secondary' | 'primary-outline' | 'seconda
 export interface IButtonProps<Type = TButtonType>{
     type?: Type;
     text?: string | number;
-    onClick?: () => void;
+    onClick?: (event: React.MouseEvent) => void;
     disabled?: boolean;
     icon?: IIconItemProps;
+    isActive?: boolean;
 }
 
 const Button = React.forwardRef<HTMLButtonElement, IButtonProps>((props, ref) => {
@@ -20,11 +21,11 @@ const Button = React.forwardRef<HTMLButtonElement, IButtonProps>((props, ref) =>
         'btn__tertiary': props.type === "tertiary",
         'btn__primary--outline': props.type === "primary-outline",
         'btn__secondary--outline': props.type === "secondary-outline",
-        'btn__tertiary--outline': props.type === "tertiary-outline"
+        'btn__tertiary--outline': props.type === "tertiary-outline",
     });
 
     return (
-        <button className={btnClass} disabled={props.disabled}>
+        <button className={btnClass} disabled={props.disabled} onClick={props.onClick} ref={ref}>
             <span className={"btn__inner"}>
                 {props.icon?.position == "left" &&
                     <span>

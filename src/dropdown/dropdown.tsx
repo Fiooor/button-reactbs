@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, {useEffect, useRef, useState} from 'react';
 import Button, { TButtonType, IButtonProps } from '../button/button';
 import useForwardRef from '../hooks/useForwardRef';
 import './styles.scss'
@@ -10,6 +10,7 @@ export interface IDropdownItemProps extends React.HTMLAttributes<HTMLLIElement> 
     href?: string;
     color?: 'employee' | 'default'
     isActive?: boolean;
+    isHovered?: boolean;
     disabled?: boolean
 }
 
@@ -22,6 +23,33 @@ export interface IDropdownProps<ButtonType = TButtonType> {
 
 const Dropdown = React.forwardRef<HTMLButtonElement, IDropdownProps>((props,  ref) => {
     const dropRef = useForwardRef<HTMLButtonElement>(ref);
+    const menuRef = useRef<any>(null);
+
+    const [open, setOpen] = useState(false);
+    const [x, setX] = useState<number | undefined>()
+    const [y, setY] = useState<number | undefined>()
+
+    useEffect(() => {
+        getPosition()
+        window.addEventListener('resize', getPosition)
+    }, [dropRef])
+
+    useEffect(() => {
+        const handleClickOutside = (event: MouseEvent) => {
+            if (dropRef.current && dropRef.current.contains(event.target as Node)) {
+                event.stopPropagation()
+            }
+            else {
+                if (menuRef.current && !menuRef.current.contains(event.target as Node)) {
+                    setOpen(!open)
+                }
+            }
+        }
+        document.addEventListener('mousedown', handleClickOutside);
+        return () => {
+            document.removeEventListener('mousedown', handleClickOutside);
+        };
+    })
 
     const listItems = props.items.map((item) => {
         const dropDownItem = cx({
@@ -31,6 +59,7 @@ const Dropdown = React.forwardRef<HTMLButtonElement, IDropdownProps>((props,  re
 
         const dropDownAnchor = cx({
             [`${item.color ? 'dropdown__anchor--employee' : 'dropdown__anchor'}`]: true,
+            'is-hovered': item.isHovered,
             'is-active': item.isActive,
         })
 
@@ -46,8 +75,6 @@ const Dropdown = React.forwardRef<HTMLButtonElement, IDropdownProps>((props,  re
         )
     });
 
-    const [x, setX] = useState<number | undefined>()
-    const [y, setY] = useState<number | undefined>()
     const getPosition = () => {
         const x = dropRef.current?.offsetLeft;
         setX(x);
@@ -56,22 +83,12 @@ const Dropdown = React.forwardRef<HTMLButtonElement, IDropdownProps>((props,  re
         setY(y);
     }
 
-    const [open, setOpen] = useState(false);
-    const handleClick = () => {
-        setOpen(!open)
-    }
-
-    useEffect(() => {
-        getPosition()
-        window.addEventListener('resize', getPosition)
-    })
-
     return (
         <>
-            <Button text={props.button.text} type={props.button.type} onClick={handleClick} ref={dropRef}/>
+            <Button text={props.button.text} type={props.button.type} onClick={() => setOpen(!open)} ref={dropRef}/>
             {open && (
-                <div className={'dropdown'} style={{transform: `translate3d(${x}px, ${y}px, 0px)`, inset: '0px auto auto 0px', zIndex: '21'}}>
-                    <ul className={'dropdown__element'} id={props.id}>
+                <div className={'dropdown'} id={props.id} style={{transform: `translate3d(${x}px, ${y}px, 0px)`, inset: '0px auto auto 0px', zIndex: '21'}}>
+                    <ul className={'dropdown__element'} ref={menuRef}>
                         {listItems}
                     </ul>
                 </div>

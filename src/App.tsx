@@ -2,11 +2,9 @@ import React from 'react';
 import Button from './button/button'
 import Container from './container/container'
 import Dropdown from './dropdown/dropdown'
-import Icon from "./icon/icon";
 import './App.css';
 
 function App() {
-    console.log(Icon)
 return (
     <>
     <Container>
@@ -19,7 +17,7 @@ return (
                 name: "ArrowRight",
                 position: "right"
             }}/>
-            <Button text={'Disabled Button'} icon={{
+            <Button text={'Disabled Button'} disabled icon={{
                 name: "ArrowRight",
                 position: "left",
             }}/>
@@ -29,10 +27,41 @@ return (
             }}/>
             <Dropdown id='suggestion-element' button={{
                 text: 'Dropdown Button',
+                icon: {
+                    name:"ArrowRight",
+                    position:"right"
+                }
             }} items={[
-                { label: 'First option', href: '#' },
-                { label: 'Second option', href: '#' },
-                { label: 'Third option', href: '#' },
+                {
+                    label: 'First option',
+                    href: '#'
+                },
+                {
+                    label: 'Second option, hover, focus',
+                    href: '#',
+                    isActive: true,
+                    isHovered: true
+                },
+                {
+                    label: 'Third option, disabled',
+                    href: '#',
+                    disabled: true,
+                },
+                {
+                    label: 'Fourth option, with image/icon',
+                    href: '#',
+                },
+                {
+                    label: 'Fifth option, employee',
+                    href: '#',
+                    color: 'employee'
+                },
+                {
+                    label: 'Sixth option, employee hover',
+                    href: '#',
+                    color: 'employee',
+                    isHovered: true
+                }
             ]} />
         </Container>
         <Container>
@@ -54,7 +83,11 @@ return (
             }}/>
             <Dropdown id='suggestion-element' button={{
                 text: 'Dropdown Button',
-                type: 'secondary'
+                type: 'secondary',
+                icon: {
+                    name:"ArrowRight",
+                    position:"right"
+                }
             }} items={[
                 {
                     label: 'First option',
@@ -63,7 +96,8 @@ return (
                 {
                     label: 'Second option, hover, focus',
                     href: '#',
-                    isActive: true
+                    isActive: true,
+                    isHovered: true
                 },
                 {
                     label: 'Third option, disabled',
@@ -82,7 +116,8 @@ return (
                 {
                     label: 'Sixth option, employee hover',
                     href: '#',
-                    color: 'employee'
+                    color: 'employee',
+                    isHovered: true
                 }
             ]} />
         </Container>
@@ -95,7 +130,7 @@ return (
                 name: "ArrowRight",
                 position: "right"
             }}/>
-            <Button text={'Disabled Button'} type={"tertiary"} icon={{
+            <Button text={'Disabled Button'} type={"tertiary"} disabled icon={{
                 name: "ArrowRight",
                 position: "left",
             }}/>
@@ -106,10 +141,41 @@ return (
             <Dropdown id='suggestion-element' button={{
                 type: "tertiary",
                 text: 'Dropdown Button',
+                icon: {
+                    name:"ArrowRight",
+                    position:"right"
+                }
             }} items={[
-                { label: 'First option', href: '#' },
-                { label: 'Second option', href: '#' },
-                { label: 'Third option', href: '#' },
+                {
+                    label: 'First option',
+                    href: '#'
+                },
+                {
+                    label: 'Second option, hover, focus',
+                    href: '#',
+                    isActive: true,
+                    isHovered: true
+                },
+                {
+                    label: 'Third option, disabled',
+                    href: '#',
+                    disabled: true,
+                },
+                {
+                    label: 'Fourth option, with image/icon',
+                    href: '#',
+                },
+                {
+                    label: 'Fifth option, employee',
+                    href: '#',
+                    color: 'employee'
+                },
+                {
+                    label: 'Sixth option, employee hover',
+                    href: '#',
+                    color: 'employee',
+                    isHovered: true
+                }
             ]} />
         </Container>
     </Container>

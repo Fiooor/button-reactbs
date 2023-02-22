@@ -59,6 +59,10 @@
         color: #990AE3;
     }
 
+    &.is-hovered {
+        background-color: #F6F6F6;
+    }
+
     &--employee {
         display: flex;
         align-items: center;
@@ -74,6 +78,10 @@
 
         &:focus {
             color: #990AE3;
+        }
+
+        &.is-hovered {
+            background-color: #F6F6F6;
         }
     }
 }
