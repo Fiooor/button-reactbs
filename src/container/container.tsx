@@ -1,6 +1,6 @@
-import React from "react";
+import React from 'react';
 import './styles.scss'
-import classNames from "classnames";
+import classNames from 'classnames';
 
 interface ContainerProps {
     children: React.ReactNode | React.ReactNode[];
