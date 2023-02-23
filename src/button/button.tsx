@@ -28,7 +28,15 @@ const Button = React.forwardRef<HTMLButtonElement, IButtonProps>((props, ref) =>
     });
 
     return (
-        <button className={btnClass} disabled={props.disabled} onClick={props.onClick} ref={ref} aria-label={props.ariaLabel} aria-expanded={props.ariaExpanded} aria-controls={props.ariaControls}>
+        <button
+            className={btnClass}
+            disabled={props.disabled}
+            onClick={props.onClick}
+            ref={ref}
+            aria-label={props.ariaLabel}
+            aria-expanded={props.ariaExpanded}
+            aria-controls={props.ariaControls}
+        >
             <span className={'btn__inner'}>
                 {props.icon?.position == 'left' &&
                     <span>

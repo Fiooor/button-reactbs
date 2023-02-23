@@ -28,7 +28,14 @@ const Icon = (props: IIconItemProps) => {
         'btn__icon--right': props.position === 'right'
     })
     return (
-        <svg className={iconClass} width={props.size} height={props.size} viewBox={props.viewBox} fill={props.fill} xmlns='http://www.w3.org/2000/svg'>
+        <svg
+            className={iconClass}
+            width={props.size}
+            height={props.size}
+            viewBox={props.viewBox}
+            fill={props.fill}
+            xmlns='http://www.w3.org/2000/svg'
+        >
             {Icons[props.name]()}
         </svg>
     );

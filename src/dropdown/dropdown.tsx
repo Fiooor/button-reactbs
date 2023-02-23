@@ -85,7 +85,16 @@ const Dropdown = React.forwardRef<HTMLButtonElement, IDropdownProps>((props,  re
 
     return (
         <>
-            <Button text={props.button.text} type={props.button.type} onClick={() => setOpen(!open)} ref={dropRef} icon={props.button.icon} ariaLabel={props.button.ariaLabel} ariaExpanded={open} ariaControls={props.button.ariaControls}/>
+            <Button
+                text={props.button.text}
+                type={props.button.type}
+                onClick={() => setOpen(!open)}
+                icon={props.button.icon}
+                ariaLabel={props.button.ariaLabel}
+                ariaExpanded={open}
+                ariaControls={props.button.ariaControls}
+                ref={dropRef}
+            />
             {open && (
                 <div className={'dropdown'} style={{transform: `translate3d(${x}px, ${y}px, 0px)`, inset: '0px auto auto 0px', zIndex: '21'}}>
                     <ul className={'dropdown__element'} ref={menuRef}>
