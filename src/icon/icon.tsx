@@ -12,7 +12,8 @@ export type IconName = keyof typeof Icons;
 
 export interface IIconItemProps {
     name: IconName;
-    position: 'left' | 'center' | 'right'
+    position: 'left' | 'center' | 'right';
+    style?: 'button'| 'item';
     fill?: string;
     size?: string;
     viewBox?: string;
@@ -22,10 +23,13 @@ export interface IIconItemProps {
 const Icon = (props: IIconItemProps) => {
     const iconClass = cx({
         'icon': true,
-        'btn__icon': true,
-        'btn__icon--left': props.position === 'left',
-        'btn__icon--center': props.position === 'center',
-        'btn__icon--right': props.position === 'right'
+
+        'btn__icon': props.style === 'button',
+        'btn__icon--left': props.style === 'button' && props.position === 'left',
+        'btn__icon--center': props.style === 'button' && props.position === 'center',
+        'btn__icon--right': props.style === 'button' && props.position === 'right',
+
+        'item__icon': props.style === 'item',
     })
     return (
         <svg
@@ -45,6 +49,7 @@ Icon.defaultProps = {
     viewBox: '0 0 64 64',
     size: '64',
     fill: 'currentColor',
+    style: 'button'
 }
 
 export default Icon

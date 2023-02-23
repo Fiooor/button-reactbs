@@ -3,15 +3,17 @@ import Button, { TButtonType, IButtonProps } from '../button/button';
 import useForwardRef from '../hooks/useForwardRef';
 import './styles.scss'
 import cx from 'classnames';
+import Icon, { IIconItemProps } from "../icon/icon";
 
 export interface IDropdownItemProps extends React.HTMLAttributes<HTMLLIElement> {
-    id?: string
+    id?: string;
     label: string;
     href?: string;
-    color?: 'employee' | 'default'
+    color?: 'employee' | 'default';
+    icon?: IIconItemProps;
     isActive?: boolean;
     isHovered?: boolean;
-    disabled?: boolean
+    disabled?: boolean;
 }
 
 export interface IDropdownProps<ButtonType = TButtonType> {
@@ -69,7 +71,13 @@ const Dropdown = React.forwardRef<HTMLButtonElement, IDropdownProps>((props,  re
         return (
             <li className={dropDownItem}>
                 <a className={dropDownAnchor} href={item.href}>
+                    {item.icon?.position == 'left' &&
+                        <Icon position={item.icon.position} name={item.icon.name} style={'item'}/>
+                    }
                     <span className={dropDownLabel}>{item.label}</span>
+                    {item.icon?.position == 'right' &&
+                      <Icon position={item.icon.position} name={item.icon.name} style={'item'}/>
+                    }
                 </a>
             </li>
         )

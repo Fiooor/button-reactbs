@@ -53,6 +53,10 @@ return (
                 {
                     label: 'Fourth option, with image/icon',
                     href: '#',
+                    icon: {
+                        name: "ArrowDown",
+                        position: "left"
+                    }
                 },
                 {
                     label: 'Fifth option, employee',
