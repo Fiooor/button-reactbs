@@ -30,6 +30,9 @@ const Icon = (props: IIconItemProps) => {
         'btn__icon--right': props.style === 'button' && props.position === 'right',
 
         'item__icon': props.style === 'item',
+        'item__icon--left': props.style === 'item' && props.position === 'left',
+        'item__icon--center': props.style === 'item' && props.position === 'center',
+        'item__icon--right': props.style === 'item' && props.position === 'right',
     })
     return (
         <svg
